@@ -60,7 +60,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className='home'>
       {selectedMovie ? (
         <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
           <header className="hero__header">
@@ -69,7 +69,7 @@ const Home = () => {
           <div className="hero__content">
             <div className="hero__content__movie-genre">
               {selectedMovie.genre_ids.map(id => {
-                return <h5 key={id}>{`${genres[id]} `}</h5>
+                return <p key={id}>{`${genres[id]} `}</p>
                 })}
             </div>
 

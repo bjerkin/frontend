@@ -93,6 +93,7 @@ p {
   position: relative;
   min-width: 600px;
   max-width: 800px;
+  text-align: left;
 }
 
 .form__group:not(:last-child) {
