@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from '../config';
 import MovieCard from './MovieCard';
+import MovieGenre from './MovieGenre';
+import Header from './Header';
 
 const Home = () => {
 
@@ -24,7 +26,7 @@ const Home = () => {
       return acc;
     }, {});
 
-    console.log( genreMap[28] );
+    console.log( genreMap );
     setGenres( genreMap );
 
     //console.log(response.data.genres );
@@ -43,7 +45,7 @@ const Home = () => {
 
     //console.log(results);
     setMovies(results);
-    setSelectedMovie(results[1]);
+    setSelectedMovie(results[0]);
   };
   
   const renderMovies = () => {
@@ -54,8 +56,8 @@ const Home = () => {
 
   useEffect(() => {
 
-    fetchMovies();
     fetchGenres();
+    fetchMovies();
 
   }, []);
 
@@ -63,14 +65,13 @@ const Home = () => {
     <div className='home'>
       {selectedMovie ? (
         <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
-          <header className="hero__header">
-            <h2>Search Bar</h2>
-          </header>
-          <div className="hero__content">
-            <div className="hero__content__movie-genre">
-              {selectedMovie.genre_ids.map(id => {
-                return <p key={id}>{`${genres[id]} `}</p>
-                })}
+          <Header className="hero__header container"/>
+
+          <div className="hero__content container">
+            <div className="hero__content__movie-genre-list">
+              {selectedMovie.genre_ids.map( id => 
+                <MovieGenre key={id} genre={ genres[id] }/>
+              )}
             </div>
 
             <div className="hero__content__movie-rating">
@@ -78,21 +79,20 @@ const Home = () => {
             </div>
 
             <div className="hero__content__movie-title">
-              <title>{selectedMovie.title}</title>
+              <h1>{selectedMovie.title}</h1>
             </div>
-
 
             <div className="hero__content__movie-overview">
-              <text>{selectedMovie.overview}</text>
+              <p>{selectedMovie.overview}</p>
             </div>
 
-            <div className="hero__content__button">
-              <button name='Watch Now' onClick={() => navigate('/main')}/> 
+            <div className="hero__content__btn">
+              <button className="btn btn__watch-now" onClick={() => navigate('/home')}>Watch Now</button> 
             </div>
           </div>
 
-          <div>
-            <h2>Trending</h2>
+          <div className='container'>
+            <h1>Trending</h1>
           </div>
         </div>
       ) : null }

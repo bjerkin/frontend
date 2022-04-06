@@ -1,8 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap%22");
-
-
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Box sizing */
@@ -42,14 +39,14 @@ p {
 }
 
 /* ------------------ LOGO ------------------ */
-.header__logo-box {
+.login__logo-box {
   position: absolute;
   top: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.header__logo {
+.login__logo {
   height: 40px;
   width: 40px;
 }
@@ -171,10 +168,6 @@ p {
 }
 
 /* ------- Button Styling ------- */
-.btn {
-  width: 90%;
-}
-
 .btn,
 .btn:link,
 .btn:visited {
@@ -190,10 +183,10 @@ p {
   cursor: pointer;
 }
 
-.btn:hover {
+/* .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
+} */
 
 .btn:active,
 .btn:focus {
@@ -205,4 +198,8 @@ p {
 .btn--blue {
   background: linear-gradient(to right bottom, #039be5, #0288d1);
   color: #fff;
+}
+
+.btn--login{
+  width: 90%;
 }

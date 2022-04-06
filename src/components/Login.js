@@ -40,8 +40,8 @@ const Login = () => {
     <section className="section-login">
       <img src={login_background} alt="login_background" className="login__background-image"/>
       <header>
-        <div className="header__logo-box">
-          <img src={logo} alt="logo" className="header__logo" />
+        <div className="login__logo-box">
+          <img src={logo} alt="logo" className="login__logo" />
         </div>
       </header>
       <div className="login">
@@ -85,7 +85,7 @@ const Login = () => {
             </div>
 
             <div className="form__group">
-              <button className="btn btn--blue" type="submit">Login</button>
+              <button className="btn btn--blue btn--login" type="submit">Login</button>
             </div>
             <div className="form__group">
               <a className="form__link form__link-register" href="www.google.com">
