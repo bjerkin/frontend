@@ -30,10 +30,14 @@ const Home = () => {
     setGenres( genreMap );
   };
   
-  const fetchMovies = async () => {
-    const {data: {results}}= await axios.get(`${MOVIE_API_URL}discover/movie`, {
+  const fetchMovies = async ( searchKey ) => {
+
+    let moviePath = searchKey ? 'search' : 'discover';
+
+    const {data: {results}}= await axios.get(`${MOVIE_API_URL}${moviePath}/movie`, {
       params: {
-        api_key: REACT_APP_MOVIE_API_KEY
+        api_key: REACT_APP_MOVIE_API_KEY,
+        query: searchKey
       }
     });
 
@@ -61,7 +65,7 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <Header className="hero__header container"/>
+      <Header className="hero__header container" onSubmit={fetchMovies} />
       {selectedMovie ? (
         <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
           <HeroContent movie={selectedMovie} genres={genres}/>
