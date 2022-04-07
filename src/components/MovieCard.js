@@ -1,7 +1,7 @@
 import React from "react";
 import { MOVIE_IMAGE_BASE_URL } from "../config";
-import addedToFavouritesIcon from "../image/added-favourite.png";
-import addToFavouritesIcon from "../image/add-favourite.png";
+import addedToFavouritesIcon from "../images/added-favourite.png";
+import addToFavouritesIcon from "../images/add-favourite.png";
 
 function MovieCard({ movie }) {
 

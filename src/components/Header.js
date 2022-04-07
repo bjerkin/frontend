@@ -1,7 +1,7 @@
 import React from 'react'
-import movieflixIcon from "../image/movieflix-icon.png";
-import movieflix from "../image/movieflix.png";
-import searchIcon from "../image/search-icon.png";
+import movieflixIcon from "../images/movieflix-icon.png";
+import movieflix from "../images/movieflix.png";
+import searchIcon from "../images/search-icon.png";
 
 const Header = () => {
   return (

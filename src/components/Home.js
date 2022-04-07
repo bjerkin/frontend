@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from '../config';
 import MovieCard from './MovieCard';
-import MovieGenre from './MovieGenre';
+import HeroContent from './HeroContent';
 import Header from './Header';
+
 
 const Home = () => {
 
@@ -17,7 +18,6 @@ const Home = () => {
 
   const fetchGenres = async () => {
     const response = await axios.get(`${MOVIE_API_URL}genre/movie/list?api_key=${REACT_APP_MOVIE_API_KEY}&language=en-US`);
-    console.log(`${MOVIE_API_URL}genre/movie/list?api_key=${REACT_APP_MOVIE_API_KEY}&language=en-US`)
     
     setGenres( response.data.genres );
 
@@ -26,10 +26,8 @@ const Home = () => {
       return acc;
     }, {});
 
-    console.log( genreMap );
+    //console.log( genreMap );
     setGenres( genreMap );
-
-    //console.log(response.data.genres );
   };
   
   const fetchMovies = async () => {
@@ -66,30 +64,7 @@ const Home = () => {
       <Header className="hero__header container"/>
       {selectedMovie ? (
         <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
-
-          <div className="hero__content container">
-            <div className="hero__content__movie-genre-list">
-              {selectedMovie.genre_ids.map( id => 
-                <MovieGenre key={id} genre={ genres[id] }/>
-              )}
-            </div>
-
-            <div className="hero__content__movie-rating">
-              <p>{selectedMovie.vote_average}</p>
-            </div>
-
-            <div className="hero__content__movie-title">
-              <h1>{selectedMovie.title}</h1>
-            </div>
-
-            <div className="hero__content__movie-overview">
-              <p>{selectedMovie.overview}</p>
-            </div>
-
-            <div className="hero__content__btn">
-              <button className="btn btn__watch-now" onClick={() => navigate('/home')}>Watch Now</button> 
-            </div>
-          </div>
+          <HeroContent movie={selectedMovie} genres={genres}/>
 
           <div className='container'>
             <h1>Trending</h1>

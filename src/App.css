@@ -131,6 +131,12 @@
   margin-bottom: 15px;
 }
 
+.hero__content__movie-rating {
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+}
+
 .hero__content__movie-genre {
   display: flex;
   align-items: flex-start;
