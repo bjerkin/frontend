@@ -63,9 +63,9 @@ const Home = () => {
 
   return (
     <div className='home'>
+      <Header className="hero__header container"/>
       {selectedMovie ? (
         <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
-          <Header className="hero__header container"/>
 
           <div className="hero__content container">
             <div className="hero__content__movie-genre-list">
@@ -75,7 +75,7 @@ const Home = () => {
             </div>
 
             <div className="hero__content__movie-rating">
-              <text>{selectedMovie.vote_average}</text>
+              <p>{selectedMovie.vote_average}</p>
             </div>
 
             <div className="hero__content__movie-title">
