@@ -25,8 +25,8 @@ function MovieCard({ movie }) {
 
       <div className="movie-card__content">
         <div>
-          <h1>{cropTitle(movie.title)}</h1>
-          <h2>{movie.release_date ? movie.release_date.substring(0, 4) : null}</h2>
+          <h3>{cropTitle(movie.title)}</h3>
+          <p>{movie.release_date ? movie.release_date.substring(0, 4) : null}</p>
         </div>
         <div className="favourite-icon">
           {isFavourite ? <img src={addedToFavouritesIcon} alt="added to favourites" onClick={toggleFavourite} /> : <img src={addToFavouritesIcon} alt="add to favourites" onClick={toggleFavourite}/>}
