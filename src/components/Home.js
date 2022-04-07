@@ -53,7 +53,7 @@ const Home = () => {
   
   const renderMovies = () => {
     return movies.map(movie => (
-      <MovieCard key={movie.id} movie={movie} />
+      <MovieCard key={movie.id} movie={movie} setSelectedMovie={setSelectedMovie} />
     ));
   };
 

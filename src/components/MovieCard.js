@@ -2,8 +2,9 @@ import React from "react";
 import { MOVIE_IMAGE_BASE_URL } from "../config";
 import addedToFavouritesIcon from "../images/added-favourite.png";
 import addToFavouritesIcon from "../images/add-favourite.png";
+import blankMoviePoster from "../images/blank-movie-poster.avif";
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, setSelectedMovie }) {
 
   const [isFavourite, setIsFavourite] = React.useState(movie.isFavourite);
 
@@ -21,8 +22,7 @@ function MovieCard({ movie }) {
 
   return (
     <div className="movie-card">
-      {movie.poster_path ? <img src={`${MOVIE_IMAGE_BASE_URL}w500${movie.poster_path}`} alt="movie poster" /> : 
-        <img src={'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG1vdmllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'} alt="default movie poster" />}
+      {<img src={movie.poster_path ? `${MOVIE_IMAGE_BASE_URL}w500${movie.poster_path}` : blankMoviePoster} alt="movie poster" onClick={ () => setSelectedMovie(movie) }/>}
 
       <div className="movie-card__content">
         <div>
