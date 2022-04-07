@@ -15,6 +15,7 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [genres, setGenres] = useState([]);
+  const [searchKey, setSearchKey] = useState('');
 
   const fetchGenres = async () => {
     const response = await axios.get(`${MOVIE_API_URL}genre/movie/list?api_key=${REACT_APP_MOVIE_API_KEY}&language=en-US`);
@@ -65,16 +66,26 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <Header className="hero__header container" onSubmit={fetchMovies} />
-      {selectedMovie ? (
-        <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
-          <HeroContent movie={selectedMovie} genres={genres}/>
-
-          <div className='container'>
-            <h1>Trending</h1>
+      <Header className="hero__header container" onSubmit={fetchMovies} setSearchKey={setSearchKey} />
+      {
+        ( searchKey ) ? (
+          <div className='heading__search-results'>
+            <h1>Search Results: {searchKey}</h1>
+            <div className='heading__search-results-line'/>
           </div>
-        </div>
-      ) : null }
+        ) : (
+          // Show hero content if there is no search input
+          ( selectedMovie) ? (
+            <div className="hero" style={{backgroundImage: `linear-gradient(269.96deg, rgba(29, 29, 29, 0) 0.04%, rgba(29, 29, 29, 0.8) 99.5%), url('${MOVIE_IMAGE_BASE_URL}w1280${selectedMovie.backdrop_path}')`}}>
+              <HeroContent movie={selectedMovie} genres={genres}/>
+
+              <div className='container'>
+                <h1>Trending</h1>
+              </div>
+            </div>
+          ) : null 
+        ) 
+      }
       <div className='movie-list'>
         {renderMovies()}
       </div>

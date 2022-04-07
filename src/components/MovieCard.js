@@ -21,7 +21,8 @@ function MovieCard({ movie }) {
 
   return (
     <div className="movie-card">
-      {movie.poster_path ? <img src={`${MOVIE_IMAGE_BASE_URL}w500${movie.poster_path}`} alt="movie poster" /> : null}
+      {movie.poster_path ? <img src={`${MOVIE_IMAGE_BASE_URL}w500${movie.poster_path}`} alt="movie poster" /> : 
+        <img src={'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fG1vdmllfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'} alt="default movie poster" />}
 
       <div className="movie-card__content">
         <div>
