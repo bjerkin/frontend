@@ -3,6 +3,7 @@ import movieflixIcon from "../images/movieflix-icon.png";
 import movieflix from "../images/movieflix.png";
 import searchIcon from "../images/search-icon.png";
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar/Navbar';
 
 const Header = ( { onSubmit, setSearchKey } ) => {
 
@@ -14,6 +15,7 @@ const Header = ( { onSubmit, setSearchKey } ) => {
     e.preventDefault();
     onSubmit(searchValue);
     setSearchKey(searchValue)
+    navigate("/home");
   };
 
   const handleLogoClick = () => {
@@ -39,6 +41,7 @@ const Header = ( { onSubmit, setSearchKey } ) => {
           <img src={searchIcon} alt="search icon" className="header__search__icon" />
         </button>
       </form>
+      <Navbar />
 {/*       <nav className="header__nav">
         <ul className="header__nav__menu">
           <li className="header__nav__menu__item">

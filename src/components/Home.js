@@ -8,15 +8,15 @@ import HeroContent from './HeroContent';
 import Header from './Header';
 
 
-const Home = () => {
+const Home = ({ genres }) => {
 
   const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [genres, setGenres] = useState([]);
   const [searchKey, setSearchKey] = useState('');
 
+/*   const [genres, setGenres] = useState([]);
   const fetchGenres = async () => {
     const response = await axios.get(`${MOVIE_API_URL}genre/movie/list?api_key=${REACT_APP_MOVIE_API_KEY}&language=en-US`);
     
@@ -29,7 +29,7 @@ const Home = () => {
 
     //console.log( genreMap );
     setGenres( genreMap );
-  };
+  }; */
   
   const fetchMovies = async ( searchKey ) => {
 
@@ -43,6 +43,7 @@ const Home = () => {
     });
 
     for (let i = 0; i < results.length; i++) {
+      //to be added - check if movie is in favourites
       results[i].isFavourite = false;
     }
 
@@ -59,7 +60,7 @@ const Home = () => {
 
   useEffect(() => {
 
-    fetchGenres();
+/*     fetchGenres(); */
     fetchMovies();
 
   }, []);
