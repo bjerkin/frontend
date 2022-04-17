@@ -15,7 +15,6 @@ const Header = ( { onSubmit, setSearchKey } ) => {
     e.preventDefault();
     onSubmit(searchValue);
     setSearchKey(searchValue)
-    navigate("/home");
   };
 
   const handleLogoClick = () => {

@@ -1,7 +1,7 @@
 import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import Navbar from "./components/Navbar/Navbar";
+import Favourites from "./components/Favourites";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -26,6 +26,7 @@ function App() {
     setGenres( genreMap );
   };
 
+
   useEffect(() => {
     fetchGenres();
   }, []);
@@ -36,7 +37,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Home genres={genres} />}/>
-              <Route path="/favourites" element={<Home genres={genres} />} />
+              <Route path="/favourites" element={<Favourites genres={genres} />} />
             </Routes>
 
       </Router>

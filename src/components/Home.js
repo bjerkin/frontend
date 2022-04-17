@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from '../config';
@@ -9,8 +8,6 @@ import Header from './Header';
 
 
 const Home = ({ genres }) => {
-
-  const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -53,14 +50,13 @@ const Home = ({ genres }) => {
   };
   
   const renderMovies = () => {
-    return movies.map(movie => (
+    return movies.map( movie => (
       <MovieCard key={movie.id} movie={movie} setSelectedMovie={setSelectedMovie} />
     ));
   };
 
   useEffect(() => {
 
-/*     fetchGenres(); */
     fetchMovies();
 
   }, []);
@@ -90,7 +86,6 @@ const Home = ({ genres }) => {
       <div className='movie-list'>
         {renderMovies()}
       </div>
-      <button onClick={() => navigate(-1)}>Back</button>
     </div>
   )
 };
