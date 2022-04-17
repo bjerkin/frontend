@@ -6,12 +6,21 @@ import MovieCard from "./MovieCard";
 import Header from "./Header";
 
 const Favourites = ({ genres }) => {
-
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
 
-  const fetchMovies = async () => {
-    // To be continued 
+  const checkMovieOnTheList = (id) => {
+    if (id === null) return false;
+
+    let isOnTheList = false;
+
+    isOnTheList = movies.find((movie) => movie.id === id);
+
+    return isOnTheList;
+  };
+
+  const fetchFavouriteMovies = async () => {
+    // To be continued
     //check DB with userID and get favourite movieIds
     //
     let movieIds = [399566, 634649];
@@ -20,25 +29,31 @@ const Favourites = ({ genres }) => {
     for (let i = 0; i < movieIds.length; i++) {
       const { data: result } = await axios.get(`${MOVIE_API_URL}movie/${movieIds[i]}`, {
         params: {
-          api_key: REACT_APP_MOVIE_API_KEY
-        }
+          api_key: REACT_APP_MOVIE_API_KEY,
+        },
       });
 
       result.isFavourite = true;
-      movies.push(result);
+
+      if (!checkMovieOnTheList(result.id)) {
+        movies.push(result);
+      }
       //console.log(result);
     }
     setMovies(movies);
   };
 
   const renderMovies = () => {
-    //console.log("Movies :");
-    //console.log(movies);
-
     return movies.map((movie) => <MovieCard key={movie.id} movie={movie} />);
   };
 
   const filterMovies = (searchKey) => {
+
+    if (searchKey === "") {
+      fetchFavouriteMovies();
+      return;
+    }
+
     let filteredMovies = movies.filter((movie) => {
       return movie.title.toLowerCase().includes(searchKey.toLowerCase());
     });
@@ -48,11 +63,11 @@ const Favourites = ({ genres }) => {
 
   //BUG UseEffect running twice
   useEffect(() => {
-    fetchMovies();
+    fetchFavouriteMovies();
   }, []);
 
   return (
-    <div className="home">
+    <div className="page-background">
       <Header className="hero__header container" onSubmit={filterMovies} setSearchKey={setSearchKey} />
       {
         <div className="heading__search-results">

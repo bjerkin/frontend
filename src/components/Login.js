@@ -98,35 +98,6 @@ const Login = () => {
     </section>
   );
 
-  /*   return (
-    <form className="user-form" onSubmit={handleSubmit}>
-      <div>
-        <input
-          id="email"
-          className="text-input"
-          type="email"
-          placeholder="Your mail"
-          required="required"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br></br>
-        <input
-          id="password"
-          className="text-input"
-          type="password"
-          placeholder="Password"
-          required="required"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br></br>
-        <input className="btn" type="submit" value="Login" />
-        <br></br>
-        <button className="btn">Register</button>
-      </div>
-    </form>
-  ); */
 };
 
 export default Login;

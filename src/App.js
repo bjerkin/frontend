@@ -6,26 +6,25 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from './config';
+import { MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from "./config";
 
 function App() {
-
-  
   const [genres, setGenres] = useState([]);
 
   const fetchGenres = async () => {
-    const response = await axios.get(`${MOVIE_API_URL}genre/movie/list?api_key=${REACT_APP_MOVIE_API_KEY}&language=en-US`);
-    
-    setGenres( response.data.genres );
+    const response = await axios.get(
+      `${MOVIE_API_URL}genre/movie/list?api_key=${REACT_APP_MOVIE_API_KEY}&language=en-US`
+    );
+
+    setGenres(response.data.genres);
 
     const genreMap = response.data.genres.reduce((acc, genre) => {
       acc[genre.id] = genre.name;
       return acc;
     }, {});
 
-    setGenres( genreMap );
+    setGenres(genreMap);
   };
-
 
   useEffect(() => {
     fetchGenres();
@@ -34,12 +33,11 @@ function App() {
   return (
     <div className="App">
       <Router>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/home" element={<Home genres={genres} />}/>
-              <Route path="/favourites" element={<Favourites genres={genres} />} />
-            </Routes>
-
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home genres={genres} />} />
+          <Route path="/favourites" element={<Favourites genres={genres} />} />
+        </Routes>
       </Router>
     </div>
   );
