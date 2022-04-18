@@ -40,7 +40,11 @@ const Header = ( { onSubmit, setSearchKey } ) => {
           <img src={searchIcon} alt="search icon" className="header__search__icon" />
         </button>
       </form>
-      <Navbar />
+
+      <div className='flex'>
+        <h3 className='header__user-box'>Thomas Anderson</h3>
+        <Navbar />
+      </div>
 {/*       <nav className="header__nav">
         <ul className="header__nav__menu">
           <li className="header__nav__menu__item">
