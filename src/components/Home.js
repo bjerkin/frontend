@@ -60,13 +60,16 @@ const Home = ({ genres }) => {
 
   useEffect(() => {
 
+    if( user === null ){
+      navigate('/');
+    }
+
     fetchMovies();
 
   }, []);
 
   return (
     <div className='page-background'>
-      { (user === '') ? navigate('/') : null }
       <Header className="hero__header container" onSubmit={fetchMovies} setSearchKey={setSearchKey} />
       {
         ( searchKey ) ? (

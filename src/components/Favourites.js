@@ -1,14 +1,19 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from "../config";
 import MovieCard from "./MovieCard";
 import Header from "./Header";
+import { UserContext } from './UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Favourites = ({ genres }) => {
 
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const checkMovieOnTheList = (id) => {
     if (id === null) return false;
@@ -64,6 +69,11 @@ const Favourites = ({ genres }) => {
 
   //BUG UseEffect running twice
   useEffect(() => {
+
+    if (user === null) {
+      navigate("/");
+    }
+
     fetchFavouriteMovies();
   }, []);
 
