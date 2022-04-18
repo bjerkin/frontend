@@ -70,11 +70,10 @@ const Favourites = ({ genres }) => {
   //BUG UseEffect running twice
   useEffect(() => {
 
-    if (user === null) {
-      navigate("/");
-    }
-
+    if (user === null) navigate("/");
+    
     fetchFavouriteMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

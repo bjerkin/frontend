@@ -60,12 +60,10 @@ const Home = ({ genres }) => {
 
   useEffect(() => {
 
-    if( user === null ){
-      navigate('/');
-    }
+    if( user === null ) navigate('/');
 
     fetchMovies();
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
