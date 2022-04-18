@@ -6,6 +6,7 @@ import MovieCard from "./MovieCard";
 import Header from "./Header";
 
 const Favourites = ({ genres }) => {
+
   const [movies, setMovies] = useState([]);
   const [searchKey, setSearchKey] = useState("");
 
