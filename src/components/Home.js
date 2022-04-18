@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY, API_URL } from '../config';
+import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from '../config';
 import MovieCard from './MovieCard';
 import HeroContent from './HeroContent';
 import Header from './Header';
@@ -36,9 +36,13 @@ const Home = ({ genres }) => {
     
     setTotalPages( (total_pages <= 500) ? total_pages : 500 ); //max page is 500 for free account
 
+    //check if movie is in favourites
     for (let i = 0; i < results.length; i++) {
-      //to be added - check if movie is in favourites
-      results[i].isFavourite = false;
+      try {
+        results[i].isFavourite = user.favourites.includes( results[i].id );
+      } catch {
+        results[i].isFavourite = false;
+      }
     }
 
     //console.log(results);

@@ -29,7 +29,8 @@ const Favourites = ({ genres }) => {
     // To be continued
     //check DB with userID and get favourite movieIds
     //
-    let movieIds = [399566, 634649];
+    //movieIds example value: [399566, 634649]
+    let movieIds = user.favourites;
     setMovies([]);
 
     for (let i = 0; i < movieIds.length; i++) {
