@@ -6,6 +6,8 @@ import MovieCard from './MovieCard';
 import HeroContent from './HeroContent';
 import Header from './Header';
 
+import Pagination from '@mui/material/Pagination';
+
 
 const Home = ({ genres }) => {
 
@@ -13,16 +15,23 @@ const Home = ({ genres }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchKey, setSearchKey] = useState('');
 
-  const fetchMovies = async ( searchKey ) => {
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  const fetchMovies = async ( searchKey, pageNumber=1 ) => {    
 
     let moviePath = searchKey ? 'search' : 'discover';
-
-    const {data: {results}}= await axios.get(`${MOVIE_API_URL}${moviePath}/movie`, {
+    const {data: {results, total_pages}}= await axios.get(`${MOVIE_API_URL}${moviePath}/movie`, {
       params: {
         api_key: REACT_APP_MOVIE_API_KEY,
-        query: searchKey
+        query: searchKey,
+        page: pageNumber
       }
     });
+
+    
+    setTotalPages( (total_pages <= 500) ? total_pages : 500 ); //max page is 500 for free account
 
     for (let i = 0; i < results.length; i++) {
       //to be added - check if movie is in favourites
@@ -34,6 +43,13 @@ const Home = ({ genres }) => {
     setSelectedMovie(results[0]);
   };
   
+  const loadPage = ( pageNumber ) => {
+
+    setCurrentPage(pageNumber);
+    fetchMovies( searchKey, pageNumber);
+
+  };
+
   const renderMovies = () => {
     return movies.map( movie => (
       <MovieCard key={movie.id} movie={movie} setSelectedMovie={setSelectedMovie} />
@@ -71,6 +87,11 @@ const Home = ({ genres }) => {
       <div className='movie-list'>
         {renderMovies()}
       </div>
+
+      <div className='pagination'>
+        <Pagination count={totalPages} color="primary" onChange={ ( event, page ) => loadPage(page) } />
+      </div>
+    
     </div>
   )
 };
