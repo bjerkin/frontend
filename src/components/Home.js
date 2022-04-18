@@ -14,9 +14,7 @@ const Home = ({ genres }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchKey, setSearchKey] = useState('');
-
   const [totalPages, setTotalPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
 
 
   const fetchMovies = async ( searchKey, pageNumber=1 ) => {    
@@ -45,7 +43,6 @@ const Home = ({ genres }) => {
   
   const loadPage = ( pageNumber ) => {
 
-    setCurrentPage(pageNumber);
     fetchMovies( searchKey, pageNumber);
 
   };
