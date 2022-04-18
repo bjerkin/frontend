@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import movieflixIcon from "../images/movieflix-icon.png";
 import movieflix from "../images/movieflix.png";
 import searchIcon from "../images/search-icon.png";
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar/Navbar';
+import { UserContext } from './UserContext';
 
 const Header = ( { onSubmit, setSearchKey } ) => {
 
   const [searchValue, setSearchValue] = useState("");
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -42,33 +44,9 @@ const Header = ( { onSubmit, setSearchKey } ) => {
       </form>
 
       <div className='flex'>
-        <h3 className='header__user-box'>Thomas Anderson</h3>
+        <h3 className='header__user-box'>{(user !== null) ? user.name : ''}</h3>
         <Navbar />
       </div>
-{/*       <nav className="header__nav">
-        <ul className="header__nav__menu">
-          <li className="header__nav__menu__item">
-            <a href="#" className="header__nav__menu__item__link">
-              Movies
-            </a>
-          </li>
-          <li className="header__nav__menu__item">
-            <a href="#" className="header__nav__menu__item__link">
-              TV Shows
-            </a>
-          </li>
-          <li className="header__nav__menu__item">
-            <a href="#" className="header__nav__menu__item__link">
-              My List
-            </a>
-          </li>
-          <li className="header__nav__menu__item">
-            <a href="#" className="header__nav__menu__item__link">
-              Account
-            </a>
-          </li>
-        </ul>
-      </nav> */}
       
     </header>
   )

@@ -1,15 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineClose } from 'react-icons/ai'
+import { MdLogout } from 'react-icons/md'
 import { SidebarData } from './SidebarData'
+import { UserContext } from '../UserContext'
+
 
 function Navbar() {
 
   const [sidebar, setSidebar] = useState(false);
+  const { setUser } = useContext(UserContext);
 
   const toggleSidebar = () => {
     setSidebar(!sidebar);
+  }
+
+  const logout = () => {
+    setUser(null);
   }
 
   return (
@@ -35,6 +43,12 @@ function Navbar() {
               </Link>
             </li>
           ))}
+
+          <li className='nav-text' onClick={ () => logout() }>
+            <Link to='/'>
+              <MdLogout />
+            </Link>
+          </li>
 
         </ul>
       </nav>

@@ -1,10 +1,12 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY } from '../config';
+import { MOVIE_IMAGE_BASE_URL, MOVIE_API_URL, REACT_APP_MOVIE_API_KEY, API_URL } from '../config';
 import MovieCard from './MovieCard';
 import HeroContent from './HeroContent';
 import Header from './Header';
+import { UserContext } from './UserContext';
+import { useNavigate } from "react-router-dom";
 
 import Pagination from '@mui/material/Pagination';
 
@@ -15,13 +17,16 @@ const Home = ({ genres }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [searchKey, setSearchKey] = useState('');
   const [totalPages, setTotalPages] = useState(0);
+  const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
 
   const fetchMovies = async ( searchKey, pageNumber=1 ) => {    
 
     let moviePath = searchKey ? 'search' : 'discover';
     const {data: {results, total_pages}}= await axios.get(`${MOVIE_API_URL}${moviePath}/movie`, {
-      params: {
+      params:{
         api_key: REACT_APP_MOVIE_API_KEY,
         query: searchKey,
         page: pageNumber
@@ -61,6 +66,7 @@ const Home = ({ genres }) => {
 
   return (
     <div className='page-background'>
+      { (user === '') ? navigate('/') : null }
       <Header className="hero__header container" onSubmit={fetchMovies} setSearchKey={setSearchKey} />
       {
         ( searchKey ) ? (

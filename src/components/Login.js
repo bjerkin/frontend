@@ -1,36 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import login_background from "../images/login_background.png";
+import { UserContext } from "./UserContext";
+import axios from "axios";
+import { API_URL } from "../config";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   //Function to validate user information from DB
-  const validateUser = (email, password) => {
-    const defaultUser = { email: "admin@admin.com", password: "admin" };
+  const login = async (email, password) => {
 
-    if (email === defaultUser.email && password === defaultUser.password) {
-      return true;
-    } else {
-      return false;
+    try {
+      const { data: user } = await axios.post(`${API_URL}users/login`, {
+        email: email,
+        password: password,
+      });
+      
+      setUser(user);
+      navigate("/home");
+    } catch (error) {
+      alert(error.response.data);
     }
+
   };
 
   const handleSubmit = (e) => {
-    console.log(email, password);
+    //console.log(email, password);
+    e.preventDefault();
 
-    let userIsValid = validateUser(email, password);
-
-    if (userIsValid) {
-      navigate("/home");
-    } else {
-      alert("Login Failed");
-    }
+    login(email, password);
 
     setEmail("");
     setPassword("");
@@ -38,7 +43,7 @@ const Login = () => {
 
   return (
     <section className="section-login">
-      <img src={login_background} alt="login_background" className="login__background-image"/>
+      <img src={login_background} alt="login_background" className="login__background-image" />
       <header>
         <div className="login__logo-box">
           <img src={logo} alt="logo" className="login__logo" />
@@ -85,7 +90,9 @@ const Login = () => {
             </div>
 
             <div className="form__group">
-              <button className="btn btn--blue btn--login" type="submit">Login</button>
+              <button className="btn btn--blue btn--login" type="submit">
+                Login
+              </button>
             </div>
             <div className="form__group">
               <a className="form__link form__link-register" href="www.google.com">
@@ -97,7 +104,6 @@ const Login = () => {
       </div>
     </section>
   );
-
 };
 
 export default Login;
