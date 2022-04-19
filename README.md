@@ -2,7 +2,7 @@
 
 ## Installation 
 
-In the project directory, run this commmand to install dependencies:
+In the project directory, run this command to install dependencies:
 
 ### `npm install` 
 
