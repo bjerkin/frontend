@@ -26,9 +26,6 @@ const Favourites = ({ genres }) => {
   };
 
   const fetchFavouriteMovies = async () => {
-    // To be continued
-    //check DB with userID and get favourite movieIds
-    //
     //movieIds example value: [399566, 634649]
     let movieIds = user.favourites;
     setMovies([]);
@@ -45,7 +42,6 @@ const Favourites = ({ genres }) => {
       if (!checkMovieOnTheList(result.id)) {
         movies.push(result);
       }
-      //console.log(result);
     }
     setMovies(movies);
   };
