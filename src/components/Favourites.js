@@ -15,6 +15,7 @@ const Favourites = ({ genres }) => {
 
   const navigate = useNavigate();
 
+  // Function that checks if the movie is in the favourites list
   const checkMovieOnTheList = (id) => {
     if (id === null) return false;
 
