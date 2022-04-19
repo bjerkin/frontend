@@ -84,7 +84,7 @@ const Login = () => {
               </label>
             </div>
             <div className="form__group">
-              <a className="form__link" href="www.google.com">
+              <a className="form__link" href="/">
                 Forget Password?
               </a>
             </div>
@@ -95,7 +95,7 @@ const Login = () => {
               </button>
             </div>
             <div className="form__group">
-              <a className="form__link form__link-register" href="www.google.com">
+              <a className="form__link form__link-register" href="/">
                 Register
               </a>
             </div>
